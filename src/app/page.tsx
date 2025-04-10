@@ -1,3 +1,5 @@
+"use client";
+
 // Family Learning App MVP - Week 1 Curriculum with Full Mobile Support, Dark Mode Toggle, and Voice Read-Aloud
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
