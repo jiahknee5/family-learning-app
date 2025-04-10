@@ -6,25 +6,25 @@ type Child = "Sophia" | "Arthur" | "Asher";
 
 const week1Curriculum: Record<Child, string[]> = {
   Sophia: [
-    "🌍 Intro to French: Learn basic greetings with audio support",
-    "🧠 Mental Models: What is First Principles Thinking? + real-life example",
-    "💼 Entrepreneur Challenge: Design your own smoothie stand",
-    "🧬 Systems Thinking: Trace how a t-shirt is made (global supply chain)",
-    "📣 Talk Lab: Record yourself telling a 1-minute story about your favorite place"
+    "🌍 Bonjour! Let's learn some French greetings:\n- Bonjour (Hello)\n- Merci (Thank you)\n- Comment ça va? (How are you?)\nPractice saying each one twice, slowly.",
+    "🧠 First Principles Thinking: Break down a big problem like 'How do we make school better?' into simple truths. What do kids need? What wastes time? Write your thoughts in a journal.",
+    "💼 Entrepreneur Challenge: Imagine your smoothie stand. What will you name it? What fruits will you mix? Draw your stand and write one line to describe it.",
+    "🧬 Systems Thinking: How is a t-shirt made?\n1. Cotton grown on a farm → 2. Sent to factory → 3. Sewed → 4. Sent to store → 5. You buy it!\nDraw this flow as a chain of steps.",
+    "📣 Talk Lab: Tell a story about your favorite place. Include who you were with, what you saw, and how you felt. Record yourself if you can!"
   ],
   Arthur: [
-    "🎮 Simon Says logic game with patterns",
-    "🌱 Eco Hero: Plant a seed in a cup and draw it",
-    "💬 Story Building: Choose your own story with Mom/Dad",
-    "🎨 World Cultures: Color the flag of Brazil",
-    "🧘 Emotions Game: Match emoji faces to real feelings"
+    "🎮 Simon Says: Play with someone. Try patterns like 'touch your nose, then hop'. Can you remember 4 steps in a row? Try to lead next!",
+    "🌱 Eco Hero: Take a paper cup, add dirt, and plant a seed. Draw what it looks like today, and where it will be in 5 days.",
+    "💬 Choose Your Own Story: Ask your grown-up to start a story. Then YOU decide what happens next. Example: 'A robot dog finds a...?'",
+    "🎨 Flag of Brazil: Use green, yellow, blue, and white to color it. Talk about where Brazil is and one thing you'd want to see there.",
+    "🧘 Emotions Game: Make faces in a mirror — happy, sad, angry, sleepy. Try guessing each other's faces. Which one is hardest to act?"
   ],
   Asher: [
-    "🎵 Listen to music from 3 different cultures",
-    "👁️ Watch colorful shape animations",
-    "🤲 Texture play with 3 different safe materials",
-    "🗣️ Hear the word 'hello' in 3 languages (EN, FR, AR)",
-    "🧸 Peekaboo logic with toys and blanket"
+    "🎵 Play 3 songs from different places — African drums, French lullaby, and Chinese zither. Watch how Asher moves or reacts.",
+    "👁️ Colorful Shapes: Use an app or toy with bold shapes (circle, square, triangle). Name each one while he watches.",
+    "🤲 Texture Time: Let Asher feel a soft cloth, crinkly paper, and a rubber ball. Describe each one. Which does he like most?",
+    "🗣️ Say 'hello' in 3 languages: 'Hello' (English), 'Bonjour' (French), 'Marhaba' (Arabic). Repeat them slowly and clearly.",
+    "🧸 Peekaboo: Use a soft toy and blanket to play. Watch for giggles and surprises. Say the toy's name each time you uncover it!"
   ]
 };
 
@@ -63,7 +63,7 @@ export default function LearningApp() {
         ))}
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 whitespace-pre-wrap">
         {week1Curriculum[selectedTab].map((task, idx) => (
           <div
             key={idx}
