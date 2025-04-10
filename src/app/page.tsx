@@ -33,7 +33,7 @@ export default function LearningApp() {
   const [completed, setCompleted] = useState<Record<Child, boolean>>({ Sophia: false, Arthur: false, Asher: false });
   const [darkMode, setDarkMode] = useState(false);
 
-  const speak = (text: string): void => {
+  const speak: (text: string) => void = (text) => {
     const msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
   };
