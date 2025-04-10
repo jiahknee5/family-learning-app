@@ -1,12 +1,6 @@
 "use client";
 
-// Family Learning App MVP - Week 1 Curriculum with Full Mobile Support, Dark Mode Toggle, and Voice Read-Aloud
 import React, { useState } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Moon, Sun } from "lucide-react";
 
 const week1Curriculum = {
   Sophia: [
@@ -33,53 +27,63 @@ const week1Curriculum = {
 };
 
 export default function LearningApp() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("Sophia");
   const [completed, setCompleted] = useState({ Sophia: false, Arthur: false, Asher: false });
+  const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode);
-  const markComplete = (child) => setCompleted({ ...completed, [child]: true });
   const speak = (text) => {
     const msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
   };
 
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+
   return (
-    <div className={`min-h-screen p-4 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
-      <div className="flex justify-between items-center mb-4">
+    <div className={`min-h-screen p-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      <div className="flex justify-between items-center mb-6">
         <h1 className="text-xl font-bold">Family Learning App - Week 1</h1>
-        <div className="flex items-center gap-2">
-          <Sun className="w-4 h-4" />
-          <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
-          <Moon className="w-4 h-4" />
-        </div>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <span>🌞</span>
+          <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} className="accent-blue-500" />
+          <span>🌜</span>
+        </label>
       </div>
-      <Tabs defaultValue="Sophia">
-        <TabsList className="flex flex-wrap overflow-x-auto">
-          <TabsTrigger value="Sophia">Sophia (11)</TabsTrigger>
-          <TabsTrigger value="Arthur">Arthur (5)</TabsTrigger>
-          <TabsTrigger value="Asher">Asher (8mo)</TabsTrigger>
-        </TabsList>
-        {Object.entries(week1Curriculum).map(([name, tasks]) => (
-          <TabsContent key={name} value={name}>
-            <div className="grid gap-4 mt-4">
-              {tasks.map((task, idx) => (
-                <Card key={idx} className="cursor-pointer" onClick={() => speak(task)}>
-                  <CardContent className="p-4">{task}</CardContent>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-4 text-center">
-              <Button
-                onClick={() => markComplete(name)}
-                disabled={completed[name]}
-                variant={completed[name] ? 'outline' : 'default'}
-              >
-                {completed[name] ? '✅ Completed' : 'Mark Week 1 as Complete'}
-              </Button>
-            </div>
-          </TabsContent>
+
+      <div className="flex gap-2 mb-4">
+        {Object.keys(week1Curriculum).map((name) => (
+          <button
+            key={name}
+            className={`px-4 py-2 rounded ${selectedTab === name ? 'bg-blue-600 text-white' : 'bg-gray-200 text-black'}`}
+            onClick={() => setSelectedTab(name)}
+          >
+            {name} ({name === 'Sophia' ? '11' : name === 'Arthur' ? '5' : '8mo'})
+          </button>
         ))}
-      </Tabs>
+      </div>
+
+      <div className="grid gap-4">
+        {week1Curriculum[selectedTab].map((task, idx) => (
+          <div
+            key={idx}
+            className="border border-gray-400 rounded-lg p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={() => speak(task)}
+          >
+            {task}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 text-center">
+        <button
+          onClick={() => setCompleted({ ...completed, [selectedTab]: true })}
+          disabled={completed[selectedTab]}
+          className={`mt-4 px-6 py-2 rounded font-bold ${
+            completed[selectedTab] ? 'bg-gray-400 text-white' : 'bg-green-600 text-white hover:bg-green-700'
+          }`}
+        >
+          {completed[selectedTab] ? '✅ Completed' : 'Mark Week 1 as Complete'}
+        </button>
+      </div>
     </div>
   );
 }
