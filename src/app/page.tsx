@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 
-const week1Curriculum = {
+type Child = "Sophia" | "Arthur" | "Asher";
+
+const week1Curriculum: Record<Child, string[]> = {
   Sophia: [
     "🌍 Intro to French: Learn basic greetings with audio support",
     "🧠 Mental Models: What is First Principles Thinking? + real-life example",
@@ -27,11 +29,11 @@ const week1Curriculum = {
 };
 
 export default function LearningApp() {
-  const [selectedTab, setSelectedTab] = useState("Sophia");
-  const [completed, setCompleted] = useState({ Sophia: false, Arthur: false, Asher: false });
+  const [selectedTab, setSelectedTab] = useState<Child>("Sophia");
+  const [completed, setCompleted] = useState<Record<Child, boolean>>({ Sophia: false, Arthur: false, Asher: false });
   const [darkMode, setDarkMode] = useState(false);
 
-  const speak = (text) => {
+  const speak = (text: string): void => {
     const msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
   };
@@ -54,7 +56,7 @@ export default function LearningApp() {
           <button
             key={name}
             className={`px-4 py-2 rounded ${selectedTab === name ? 'bg-blue-600 text-white' : 'bg-gray-200 text-black'}`}
-            onClick={() => setSelectedTab(name)}
+            onClick={() => setSelectedTab(name as Child)}
           >
             {name} ({name === 'Sophia' ? '11' : name === 'Arthur' ? '5' : '8mo'})
           </button>
